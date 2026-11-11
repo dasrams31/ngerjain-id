@@ -1,26 +1,55 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --paper: #f4f1ea;
+  --card: #fbfaf6;
+  --ink: #151515;
+  --muted: #5f5d58;
+  --line: #dcd7cc;
+  --accent: #ff5b1f;
+  --accent-ink: #151515;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-paper: var(--paper);
+  --color-card: var(--card);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+body {
+  background: var(--paper);
+  color: var(--ink);
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+@utility btn {
+  @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition-colors disabled:cursor-not-allowed disabled:opacity-50;
+}
+@utility btn-primary {
+  @apply btn bg-ink text-paper hover:bg-accent hover:text-accent-ink;
+}
+@utility btn-accent {
+  @apply btn bg-accent text-accent-ink hover:bg-ink hover:text-paper;
+}
+@utility btn-ghost {
+  @apply btn border border-line bg-card text-ink hover:border-ink;
+}
+@utility field {
+  @apply w-full rounded-xl border border-line bg-card px-3.5 py-2.5 text-sm text-ink placeholder:text-muted/70 focus:border-ink focus:outline-none;
+}
+@utility label {
+  @apply mb-1.5 block text-sm font-medium;
+}
+@utility panel {
+  @apply rounded-2xl border border-line bg-card p-5;
 }
